@@ -10,6 +10,10 @@ For more information about the USDZ loader used in this demo please take a look 
 ## Demo
 This repository build is published to [usdz-viewer.net](https://www.usdz-viewer.net)
 
+## インストールについて
+INSTALLATION_GUIDE_UPDATED.md にインストール手順が記載されています。
+これをClaude Codeに読ませてインストールします。
+
 ## How to use
 Clone the repository
 ```
