@@ -16,7 +16,12 @@ cd /path/to/usdz-web-viewer2
 npm install
 ```
 
-**注意**: 多くの脆弱性警告が表示されますが、開発環境では動作します。
+**注意**: 以下のような警告が表示されますが、開発環境では正常に動作します：
+- 脆弱性警告（96-170件程度）
+- 非推奨パッケージ警告（Vue 2 EOL、rimraf、eslintなど）
+- Node.jsエンジン互換性警告（@achrinza/node-ipc）
+
+これらの警告は無視して進めてください。
 
 ### 3. Node.js互換性の修正
 Node.js v17以降でOpenSSLエラーが発生するため、`package.json`のスクリプトを修正する必要があります。
@@ -45,18 +50,33 @@ npm run copydeps
 npm run serve
 ```
 
+**所要時間**: 初回ビルドは2-3分程度かかります。
+
 正常に起動すると、以下のようなメッセージが表示されます：
 
 ```
+DONE  Compiled successfully in 2563ms
+
 App running at:
 - Local:   http://localhost:8082/
 - Network: http://[your-ip]:8082/
+
+No issues found.
 ```
 
 ## アクセス方法
 ブラウザで http://localhost:8082/ を開き、USDZファイルをアップロードして3Dモデルを表示できます。
 
 ## トラブルシューティング
+
+### クリーンインストールが必要な場合
+問題が発生した場合は、以下でクリーンインストール：
+```bash
+rm -rf node_modules package-lock.json
+npm install
+npm run copydeps
+npm run serve
+```
 
 ### browserslist警告が表示される場合
 以下のコマンドを実行してください：
@@ -70,10 +90,14 @@ npx update-browserslist-db@latest
 PORT=8080 npm run serve
 ```
 
+### ビルドが遅い場合
+初回ビルドは特に時間がかかります。2回目以降は高速化されます。
+
 ## 注意事項
 - TypeScript型定義の非互換性により本番ビルド(`npm run build`)は型エラーで失敗する可能性がありますが、開発サーバーは正常に動作します
-- Node.js v24などの新しいバージョンでも、OpenSSLレガシープロバイダーの設定により動作します
+- Node.js v24.1.0で動作確認済み（OpenSSLレガシープロバイダーの設定により）
 - 多くのパッケージが非推奨となっていますが、現時点では動作に影響はありません
+- `package.json`にはすでにOpenSSLレガシープロバイダーの設定が含まれています
 
 ## 開発サーバーの停止
 ターミナルで `Ctrl + C` を押すことで開発サーバーを停止できます。
