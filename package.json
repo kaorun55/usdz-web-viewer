@@ -2,8 +2,8 @@
   "name": "usdz-viewer-net",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "serve": "NODE_OPTIONS=--openssl-legacy-provider vue-cli-service serve",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider vue-cli-service build",
     "lint": "vue-cli-service lint",
     "deploy": "npm run copydeps & npm run build & firebase deploy",
     "copydeps": "copyfiles -u 3 \"node_modules/three-usdz-loader/external/**/*\" public/wasm"
